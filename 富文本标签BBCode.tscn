@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtdmjbhlffnay"]
+
+[ext_resource type="Script" uid="uid://tvprt2qtqsr4" path="res://富文本标签BBCode.gd" id="1_jbxpo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q1hwu"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_eu7pn"]
+action = &"toggle_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_n2ck8"]
+events = [SubResource("InputEventAction_eu7pn")]
+
+[node name="RichTextBBCode" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -300.0
+offset_right = 512.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("1_jbxpo")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+focus_mode = 2
+theme_override_colors/selection_color = Color(1, 1, 1, 0.164706)
+theme_override_constants/table_v_separation = 10
+theme_override_constants/table_h_separation = 120
+theme_override_constants/line_separation = 1
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q1hwu")
+bbcode_enabled = true
+text = "富文本标签（RichTextLabel） 是一个灵活添加文本到您的项目的方式，它可以支持[i]斜体[/i], [b]粗体[/b]和[i][b]加粗斜体[/b][/i].
+[u]下划线[/u]和[s]删除线[/s]也同样可以使用，包括[u][i]带下划线斜体[/i][/u]，[u][b]下划线粗体[/b][/u]和[u][i][b]下划线加粗斜体[/b][/i][/u].
+
+文本[color=#4cf]颜色[/color], [fgcolor=#49c9]前景[color=red]色[/color][/fgcolor]和[bgcolor=#49c9]背景[color=#4cf]色[/color][/bgcolor]都可以调整.
+
+它同样可以设置图片[img=68x34 ]res://unicorn_icon.png[/img]， [font_size=24]字体大小[/font_size]，也可以设置[color=aqua][url=https://godotengine.org]自定义连接[/url][/color]。[hint=这是悬浮显示内容。]光标悬停在此次显示悬浮显示内容[/hint]
+默认是左对齐,[center]也支持居中显示[/center][right]也可以调整为右对齐[/right]
+
+[fill][dropcap font_size=45 color=yellow margins=0,-10,0,-12]支[/dropcap]持填充对齐，并允许编写很长的文本，最终将水平空间完全填满文字。还支持首字大写。当使用首字大写时，段落的第一个字符会变大，占据几行文本，并可选择使用特定的字体或颜色。以下内容为展示填充对齐而添加，以下内容为展示填充对齐而添加，，以下内容为展示填充对齐而添加，以下内容为展示填充对齐而添加。[/fill]
+
+还可以支持以下显示效果：
+[pulse freq=0.5]脉动效果[/pulse]    [wave amp=100 freq=5]波动效果[/wave]    [tornado radius=15 freq=5]龙卷风效果[/tornado]    [shake rate=50 level=15]抖动效果[/shake]    [fade start=0.5 length=4]逐渐消失[/fade]    [rainbow freq=1 sat=1 val=0.8]霓虹灯效果[/rainbow]
+
+[table=3]
+[cell border=#fff3 bg=#fff1]支持
+表格绘制
+[/cell]
+[cell border=#fc13 bg=#fc11][ul]有符号
+的清单。
+[/ul]
+[/cell]
+[cell border=#fc13 bg=#fc11][ol]有排序
+的清单。
+[/ol]
+[/cell]
+[/table]
+
+You can also create custom tags/effects, or customize behavior of [lb]url[rb] tags on click. For full reference, [color=aqua][url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]check the documentation.[/url][/color]
+
+"
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="Pause" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_right = 96.0
+grow_vertical = 0
+toggle_mode = true
+shortcut = SubResource("Shortcut_n2ck8")
+shortcut_in_tooltip = false
+text = "暂停效果"
+
+[connection signal="meta_clicked" from="RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
+[connection signal="toggled" from="Pause" to="." method="_on_pause_toggled"]
