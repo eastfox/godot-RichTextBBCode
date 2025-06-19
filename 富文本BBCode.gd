@@ -1,17 +1,5 @@
 extends Control
 
-func _ready() -> void:
-	var content : String
-	var arry : Array
-
-	arry.append("[i]斜体[/i]\t斜体\n")
-	
-	arry.append("[i]粗体[/i]\n")
-	
-	for i in arry.size():
-		content += arry[i]
-	$RichTextLabel.text = content
-
 func _on_RichTextLabel_meta_clicked(meta):
 	var err = OS.shell_open(meta)
 	if err == OK:
