@@ -23,9 +23,16 @@ func _process_custom_fx(char_fx):
 	
 	# 反转动画逻辑：先随机后清晰
 	if t < dirty_time:
-		# 随机字符阶段
-		var value = randi() % 62  # 0-61范围
-		value += 48 if value < 10 else (55 if value < 36 else 61)
+		# 随机字符阶段 - 包含中文、英文、数字、韩文
+		var ranges = [
+			[0x0030, 0x0039],  # 数字0-9
+			[0x0041, 0x005A],  # 大写字母A-Z
+			[0x0061, 0x007A],  # 小写字母a-z
+			[0xAC00, 0xD7A3],  # 韩文字母
+			[0x4E00, 0x9FFF]   # 常用汉字
+		]
+		var range_idx = randi() % ranges.size()
+		var value = ranges[range_idx][0] + (randi() % (ranges[range_idx][1] - ranges[range_idx][0] + 1))
 		char_fx.glyph_index = get_text_server().font_get_glyph_index(char_fx.font, 1, value, 0)
 	else:
 		# 恢复原始字符阶段
